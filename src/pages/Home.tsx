@@ -23,6 +23,10 @@ export default function Home() {
     ""
   );
 
+  const handleEdit = (event: Event) => {
+    navigate(`/edit/${event.id}`, { state: { event } });
+  };
+
   const token = localStorage.getItem("token");
   let currentUserId = "";
   if (token) {
@@ -133,6 +137,7 @@ export default function Home() {
             event={event}
             currentUserId={currentUserId}
             onDelete={handleDelete}
+            onEdit={handleEdit}
           />
         ))}
       </div>

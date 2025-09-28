@@ -39,6 +39,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/edit/:id"
+          element={
+            <ProtectedRoute>
+              <CreateEvent />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

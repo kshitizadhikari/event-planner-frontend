@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 import type { Event } from "../types/Event";
+import { PencilIcon, TrashIcon } from "@heroicons/react/16/solid";
 
 type EventCardProps = {
   event: Event;
   currentUserId: string;
   onDelete: (id: string) => void;
+  onEdit: (event: Event) => void;
 };
 
 export default function EventCard({
   event,
   currentUserId,
   onDelete,
+  onEdit,
 }: EventCardProps) {
   const handleDeleteClick = () => {
     if (confirm("Are you sure you want to delete this event?")) {
@@ -42,12 +45,22 @@ export default function EventCard({
       </Link>
 
       {event.user_id === currentUserId && (
-        <button
-          onClick={handleDeleteClick}
-          className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 text-sm"
-        >
-          X
-        </button>
+        <div className="absolute top-2 right-2 flex gap-2">
+          <button
+            onClick={() => onEdit(event)}
+            className="bg-yellow-500 p-1 rounded hover:bg-yellow-600"
+            title="Edit Event"
+          >
+            <PencilIcon className="w-5 h-5 text-white" />
+          </button>
+          <button
+            onClick={handleDeleteClick}
+            className="bg-red-500 p-1 rounded hover:bg-red-600"
+            title="Delete Event"
+          >
+            <TrashIcon className="w-5 h-5 text-white" />
+          </button>
+        </div>
       )}
     </div>
   );
