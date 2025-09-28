@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../api/auth";
 
 export default function Register() {
@@ -75,6 +75,13 @@ export default function Register() {
           Register
         </button>
       </form>
+
+      <p className="mt-4 text-center text-gray-600">
+        Already have an account?{" "}
+        <Link to="/login" className="text-blue-600 hover:underline">
+          Login here
+        </Link>
+      </p>
     </div>
   );
 }

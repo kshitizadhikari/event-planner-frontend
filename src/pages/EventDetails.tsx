@@ -1,24 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-
-type Tag = {
-  id: string;
-  name: string;
-};
-
-type Event = {
-  id: string;
-  title: string;
-  description: string;
-  date_time: string;
-  location: string;
-  type: string;
-  user_id: string;
-  tags: Tag[];
-};
+import type { Event } from "../types/Event"; 
 
 export default function EventDetail() {
+
   const { id } = useParams<{ id: string }>();
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
@@ -44,7 +30,7 @@ export default function EventDetail() {
   if (!event) return <p>No event found.</p>;
 
   return (
-    <div className="p-6 max-w-2xl mx-auto border rounded shadow">
+    <div className="mt-5 p-6 max-w-2xl mx-auto border rounded shadow">
       <h1 className="text-2xl font-bold mb-2">{event.title}</h1>
       <p className="mb-4">{event.description}</p>
       <p className="text-gray-600 mb-2">
@@ -56,10 +42,7 @@ export default function EventDetail() {
 
       <div className="flex flex-wrap gap-2 mb-4">
         {event.tags.map((tag) => (
-          <span
-            key={tag.id}
-            className="bg-blue-200 px-2 py-1 rounded text-sm"
-          >
+          <span key={tag.id} className="bg-blue-200 px-2 py-1 rounded text-sm">
             {tag.name}
           </span>
         ))}

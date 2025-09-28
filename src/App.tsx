@@ -3,15 +3,42 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import EventDetail from "./pages/EventDetails";
+import ProtectedRoute from "./components/ProtectedRoute";
+import CreateEvent from "./pages/CreateEvent";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* Public routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/event/:id" element={<EventDetail />} />
+
+        {/* Protected routes */}
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/event/:id"
+          element={
+            <ProtectedRoute>
+              <EventDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <ProtectedRoute>
+              <CreateEvent />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
